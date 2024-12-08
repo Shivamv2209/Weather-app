@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App - Enter Location</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="weather-app">
+    <h1>Weather App</h1>
+    <p>Enter your location to get weather updates</p>
+    <form action="/get-weather" method="POST">
+      <label for="place">Place Name:</label>
+      <input type="text" id="place" name="place" placeholder="Enter Place Name" required>
+      <!-- <input type="text" id ="country" name="country" placeholder="Enter Country Name" required> -->
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <% if (locals.content) { %>
+      <div class="weather-details">
+       
+      <h2>Weather Details:</h2>
+      <p>Location: <%= content.name %></p>
+      <p>Actual Temperature: <%= content.main.temp %>°F and Temperature Feels like : <%= content.main.feels_like %>°F </p>
+      <p>Condition: <% const weatherData=content.weather[0]
+           const description = weatherData.description;
+      %> <%= description %> </p>
+     </div>
+    <% } %>
+  
+    <% if (locals.error){ %>
+      <div>
+         <p> <%= error %></p>
+      </div>
+    <% } %>
+    
+  </div>
+</body>
+</html>
